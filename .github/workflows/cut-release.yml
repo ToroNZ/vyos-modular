@@ -10,6 +10,7 @@ jobs:
   compile:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - name: Install Python requirements
         run: pip install -r requirements.txt
       - name: Build ISO
