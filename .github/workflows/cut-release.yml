@@ -6,6 +6,12 @@ on:
     branches:
       - toronz-main
 
+permissions:
+  id-token: "write"
+  contents: "write"
+  packages: "write"
+  pull-requests: "read"
+
 jobs:
   compile:
     runs-on: ubuntu-latest
