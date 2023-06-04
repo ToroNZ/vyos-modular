@@ -15,12 +15,12 @@ jobs:
         run: pip install -r requirements.txt
       - name: Build ISO
         run: python main.py -c config.yml
-      - name: Get all dirs (DEBUG)
-        run: find . -type d
+      - name: Rename ISO
+        run: mv bin/vyos-*.iso bin/vyos-${{ github.job_workflow_sha }}.iso
       - uses: actions/upload-artifact@v3
         with:
           name: vyos
-          path: build/vyos-*.iso
+          path: bin/vyos-${{ github.job_workflow_sha }}.iso
   release:
     runs-on: ubuntu-latest
     needs: compile
@@ -28,11 +28,11 @@ jobs:
       - uses: actions/download-artifact@master
         with:
           name: vyos
-          path: build/vyos-*.iso
+          path: bin/vyos-${{ github.job_workflow_sha }}.iso
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           automatic_release_tag: "latest"
           prerelease: true
           title: "She'll be alright kinda build"
-          files: build/vyos-*.iso
+          files: bin/vyos-${{ github.job_workflow_sha }}.iso
