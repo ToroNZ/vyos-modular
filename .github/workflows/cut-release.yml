@@ -22,11 +22,11 @@ jobs:
       - name: Build ISO
         run: python main.py -c config.yml
       - name: Rename ISO
-        run: mv bin/vyos-*.iso bin/vyos-${{ github.job_workflow_sha }}.iso
+        run: mv bin/vyos-*.iso bin/vyos-${{ github.sha }}.iso
       - uses: actions/upload-artifact@v3
         with:
           name: vyos
-          path: bin/vyos-${{ github.job_workflow_sha }}.iso
+          path: bin/vyos-${{ github.sha }}.iso
   release:
     runs-on: ubuntu-latest
     needs: compile
@@ -34,11 +34,11 @@ jobs:
       - uses: actions/download-artifact@master
         with:
           name: vyos
-          path: bin/vyos-${{ github.job_workflow_sha }}.iso
+          path: bin/vyos-${{ github.sha }}.iso
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           automatic_release_tag: "latest"
           prerelease: true
           title: "She'll be alright kinda build"
-          files: bin/vyos-${{ github.job_workflow_sha }}.iso
+          files: bin/vyos-${{ github.sha }}.iso
