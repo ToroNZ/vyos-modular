@@ -1,6 +1,8 @@
 name: 'Compile and create new VyOS Release'
 
 on:
+  schedule: 
+    - cron: '15 10 7 * *' # Runs at 10:15, on day 7 of the month.
   workflow_dispatch:
   push:
     branches:
