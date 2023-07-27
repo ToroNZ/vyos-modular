@@ -1,4 +1,4 @@
-name: tailscale
+name: LibreNZ
 vyos_branch: current
 modules:
   - type: git

@@ -1,4 +1,5 @@
 # vyos-modular
+[![Compile and create new VyOS Release](https://github.com/ToroNZ/vyos-modular/actions/workflows/cut-release.yml/badge.svg?branch=toronz-main)](https://github.com/ToroNZ/vyos-modular/actions/workflows/cut-release.yml)
 
 A tool to create custom vyos installations
 
@@ -8,7 +9,6 @@ A tool to create custom vyos installations
 |-------------------------|--------------------------------------------------------|
 | tailscale               | https://github.com/jack-broadway/vyos-module-tailscale |
 | speedtest               | https://github.com/kylechase/vyos-module-speedtest     |
-| mellanox firmware tools | https://github.com/Ramblurr/vyos-module-mft            |
 | gitops tools            | https://github.com/Ramblurr/vyos-module-gitops         |
 
 ## Installation

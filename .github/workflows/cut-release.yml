@@ -7,6 +7,9 @@ on:
   push:
     branches:
       - toronz-main
+    paths-ignore:
+      - ".github/**"
+      - "**.md"
 
 permissions:
   id-token: "write"
