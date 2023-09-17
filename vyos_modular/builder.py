@@ -230,7 +230,50 @@ class EquuleusBuilder(Builder):
 
 class SaggitaBuilder(Builder):
     def _build_iso(self):
-        # Carry out iso build using current vyos build branch
+        # Carry out iso build using Saggita vyos build branch
+        configure_cmd = [
+            "sudo",
+            "./build-vyos-image",
+            "--architecture",
+            "amd64",
+            "--build-type",
+            "release",
+            "--version",
+            f"{self.config['name']}-{self.config['vyos_branch']}",
+        ]
+
+        if "build_comment" in self.config:
+            configure_cmd += ["--build-comment", self.config["build_comment"]]
+
+        # Build list of additional repositories and packages from modules
+        for module in self.modules:
+            if module.config.repositories:
+                for repository in module.config.repositories:
+                    configure_cmd += [
+                        "--custom-apt-entry",
+                        repository.apt_entry,
+                        "--custom-apt-key",
+                        "/vyos/" + repository.gpg_key,
+                    ]
+            if module.config.packages:
+                for package in module.config.packages:
+                    configure_cmd += ["--custom-package", package]
+
+        configure_cmd += ["iso"]
+
+        vyos_modular.commands.run_vyos_build_cmd(
+            configure_cmd,
+            self.build_dir / self.vyos_build_name,
+            self.config["vyos_branch"],
+        )
+
+        build_output = self.build_dir / self.vyos_build_name / "build"
+        iso = next(build_output.glob("vyos-*.iso"))
+        shutil.copy(iso, self.bin_dir)
+
+class CircinusBuilder(Builder):
+    def _build_iso(self):
+        # Carry out iso build using Circinus vyos build branch
         configure_cmd = [
             "sudo",
             "./build-vyos-image",

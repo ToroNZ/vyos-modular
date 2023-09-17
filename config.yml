@@ -1,5 +1,5 @@
 name: LibreNZ
-vyos_branch: current
+vyos_branch: sagitta
 modules:
   - type: git
     url: https://github.com/ToroNZ/vyos-module-tailscale.git

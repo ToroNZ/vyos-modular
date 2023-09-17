@@ -17,9 +17,12 @@ if __name__ == "__main__":
         case "equuleus" | "1.3":
             config["vyos_branch"] = "equuleus"
             builder = vyos_modular.builder.EquuleusBuilder(config)
-        case "current" | "sagitta" | "1.4":
-            config["vyos_branch"] = "current"
+        case "sagitta" | "1.4":
+            config["vyos_branch"] = "sagitta"
             builder = vyos_modular.builder.SaggitaBuilder(config)
+        case "current" | "circinus" | "1.5":
+            config["vyos_branch"] = "current"
+            builder = vyos_modular.builder.CircinusBuilder(config)
         case other:
             raise ValueError(f"Unsupported build branch {config['vyos_branch']}")
 
