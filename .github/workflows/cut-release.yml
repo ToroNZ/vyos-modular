@@ -47,5 +47,5 @@ jobs:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           automatic_release_tag: "latest"
           prerelease: true
-          title: "She'll be alright kinda build"
+          title: "Latest release"
           files: bin/vyos-*.iso
